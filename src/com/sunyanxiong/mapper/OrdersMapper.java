@@ -26,5 +26,11 @@ public interface OrdersMapper {
     // 查询用户信息及购买的商品信息
     public List<User> findUserAndItems()throws Exception;
 
+    // 根据id查找用户信息
+    public User findUserById(int id) throws Exception;
+
+    // 查询订单信息，关联查询订单信息，延迟加载
+    public List<Orders> findOrdersLoadingLazy()throws Exception;
+
 
 }

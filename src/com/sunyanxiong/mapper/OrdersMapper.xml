@@ -161,5 +161,40 @@
         and orderdetail.items_id = items.id;
     </select>
 
+    <!-- 查询订单信息，关联查询用户信息，采用延迟加载的方式 -->
+
+    <!-- 通过id查询用户信息 -->
+    <select id="findUserById" parameterType="int" resultType="com.sunyanxiong.entities.User">
+        select user.* from user where user.id = #{id}
+    </select>
+
+    <!-- 关联查询用户信息,一个订单只能由一个用户来创建,一对一 -->
+    <resultMap id="orderAndUserMap" type="com.sunyanxiong.entities.Orders">
+        <id column="id" property="id"/>
+
+        <result column="user_id" property="user_id"></result>
+        <result column="number" property="number"></result>
+        <result column="createtime" property="createtime"></result>
+        <result column="note" property="note"></result>
+
+        <!-- select:关联查询需要关联查询的statement的id
+             column:关联查询的id
+         -->
+        <association property="user" javaType="com.sunyanxiong.entities.User" select="findUserById" column="user_id">
+            <id column="user_id" property="id"/>
+
+            <result column="username" property="username"/>
+            <result column="birthday" property="birthday"/>
+            <result column="sex" property="sex"/>
+            <result column="address" property="address"/>
+
+        </association>
+
+    </resultMap>
+
+    <select id="findOrdersLoadingLazy" resultMap="orderAndUserMap" >
+        select orders.* from orders
+    </select>
+
 
 </mapper>

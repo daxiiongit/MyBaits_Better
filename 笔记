@@ -61,5 +61,17 @@
     2.sql语句
     3.将查询出来的结果集合映射到user中，user中包含订单order映射，order中包含orderdetail映射，在orderdetail中包含items映射
 
+六、延迟加载
+    定义：有时在多表查询的时候我们只需要查询单表（几张表）就能满足我们的需求，同时也有肯可能需要查询多表，此时我们就可以根据需求来
+        执行查找信息，满足特定需求时采用延迟加载
+    需求：查询订单信息，关联查询创建订单的用户信息，在不调用 Orders 类中的 getUser()方法的时候不实用延迟加载，调用时才使用延迟加载
+    1.不使用延迟加载时sql：只查询订单信息
+    2.使用延迟加载时sql：关联查询用户信息
+    3.MyBaits默认没有开启延迟加载，需要在配置文件中配置延迟加载
+        <settings/>中有两个配置，一个是全局，一个是懒加载
+
+    4.注意：在MyBatis中配置文件中的内容配置是有一定的顺序的，
+        properties/settings/typeAliases/typeHandlers/objectFactory/objectWrapperFactory/plugins/environments/databaseIdProvider/
+
 
 
