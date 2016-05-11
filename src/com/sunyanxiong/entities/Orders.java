@@ -1,6 +1,7 @@
 package com.sunyanxiong.entities;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Description: 用户购买商品后生成的订单信息
@@ -15,7 +16,11 @@ public class Orders {
     private Date createtime;
     private String note;
 
+    // 查询订单信息关联查询用户信息
     private User user;
+
+    // 查询订单信息关联查询订单详细
+    private List<Orderdetail> orderdetails;
 
     public User getUser() {
         return user;
@@ -65,6 +70,14 @@ public class Orders {
         this.note = note;
     }
 
+    public List<Orderdetail> getOrderdetails() {
+        return orderdetails;
+    }
+
+    public void setOrderdetails(List<Orderdetail> orderdetails) {
+        this.orderdetails = orderdetails;
+    }
+
     @Override
     public String toString() {
         return "Orders{" +
@@ -74,6 +87,7 @@ public class Orders {
                 ", createtime=" + createtime +
                 ", note='" + note + '\'' +
                 ", user=" + user +
+                ", orderdetails=" + orderdetails +
                 '}';
     }
 }

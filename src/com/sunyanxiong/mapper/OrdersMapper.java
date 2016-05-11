@@ -1,5 +1,6 @@
 package com.sunyanxiong.mapper;
 
+import com.sunyanxiong.entities.Orderdetail;
 import com.sunyanxiong.entities.Orders;
 import com.sunyanxiong.entities.OrdersCustom;
 
@@ -17,5 +18,9 @@ public interface OrdersMapper {
 
     // 查询订单信息（resultMap）
     public List<Orders> findOrdersResultMap()throws Exception;
+
+    // 查询订单及订单详情
+    public List<Orderdetail> findOrdersAndOrderdetailResultMap()throws Exception;
+
 
 }
