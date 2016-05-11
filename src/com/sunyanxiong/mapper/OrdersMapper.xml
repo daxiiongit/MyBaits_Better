@@ -14,4 +14,40 @@
                where orders.user_id = user.id;
     </select>
 
+
+    <!-- 定义查询订单信息的resultMap,将查询的结果映射到Orders类中 -->
+    <resultMap id="ordersResultMap" type="com.sunyanxiong.entities.Orders">
+        <!-- 定义查询的订单信息 -->
+        <id column="id" property="id"></id>
+
+        <result column="user_id" property="user_id"></result>
+        <result column="number" property="number"></result>
+        <result column="createtime" property="createtime"></result>
+        <result column="note" property="note"></result>
+
+        <!-- 关联查询的用户信息,
+            property:将要关联查询的用户信息映射到 Orders 中
+         -->
+        <association property="user" javaType="com.sunyanxiong.entities.User">
+            <!--<id column="user_id" property="id"></id>:
+                这里，id的column:值查询主表的中的外键，property：关联查询映射的pojo中的属性 -->
+            <id column="user_id" property="id"></id>
+
+            <result column="username" property="username"></result>
+            <result column="birthday" property="birthday"></result>
+            <result column="sex" property="sex"></result>
+        </association>
+
+    </resultMap>
+
+    <!-- 采用resultMap 的方式来查询用户信息 -->
+    <select id="findOrdersResultMap" resultMap="ordersResultMap">
+        select orders.*,
+        user.username,
+        user.birthday,
+        user.sex
+        from user,orders
+        where orders.user_id = user.id;
+    </select>
+
 </mapper>

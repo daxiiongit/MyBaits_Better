@@ -15,6 +15,16 @@ public class Orders {
     private Date createtime;
     private String note;
 
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public int getId() {
         return id;
     }
@@ -63,6 +73,7 @@ public class Orders {
                 ", number='" + number + '\'' +
                 ", createtime=" + createtime +
                 ", note='" + note + '\'' +
+                ", user=" + user +
                 '}';
     }
 }

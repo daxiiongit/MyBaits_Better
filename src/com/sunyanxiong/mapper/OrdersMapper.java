@@ -1,5 +1,6 @@
 package com.sunyanxiong.mapper;
 
+import com.sunyanxiong.entities.Orders;
 import com.sunyanxiong.entities.OrdersCustom;
 
 import java.util.List;
@@ -11,7 +12,10 @@ import java.util.List;
  */
 public interface OrdersMapper {
 
-    // 查询订单信息
+    // 查询订单信息（resultType）
     public List<OrdersCustom> findOrdersResultType()throws Exception;
+
+    // 查询订单信息（resultMap）
+    public List<Orders> findOrdersResultMap()throws Exception;
 
 }
