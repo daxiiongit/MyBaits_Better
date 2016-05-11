@@ -3,6 +3,7 @@ package com.sunyanxiong.mapper;
 import com.sunyanxiong.entities.Orderdetail;
 import com.sunyanxiong.entities.Orders;
 import com.sunyanxiong.entities.OrdersCustom;
+import com.sunyanxiong.entities.User;
 
 import java.util.List;
 
@@ -21,6 +22,9 @@ public interface OrdersMapper {
 
     // 查询订单及订单详情
     public List<Orderdetail> findOrdersAndOrderdetailResultMap()throws Exception;
+
+    // 查询用户信息及购买的商品信息
+    public List<User> findUserAndItems()throws Exception;
 
 
 }

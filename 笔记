@@ -55,7 +55,11 @@
     1.确定查询主表：orders,关联表：订单明细
     2.sql语句,如果使用resultType，测查询出来的结果出现大量的重复数据，所以采用resultMap来实现
 
-
+五、多对多查询
+    需求：查询用户及用户购买的商品信息
+    1.查询主表：user,关联查询：orders,oderdetail,items
+    2.sql语句
+    3.将查询出来的结果集合映射到user中，user中包含订单order映射，order中包含orderdetail映射，在orderdetail中包含items映射
 
 
 

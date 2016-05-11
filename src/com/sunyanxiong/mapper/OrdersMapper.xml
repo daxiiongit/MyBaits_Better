@@ -51,7 +51,7 @@
     </select>
 
     <!-- 查询订单信息及订单明细信息 ，采用resultMap实现 -->
-    
+
     <!-- 定义ordersAndOrderdetailResultMap,查询数来的集合映射到 orders 类中,List<Orderdetail> orderdetails -->
     <resultMap id="ordersAndOrderdetailResultMap" type="com.sunyanxiong.entities.Orders">
         <!-- 订单信息 -->
@@ -86,7 +86,7 @@
         </collection>
 
     </resultMap>
-    
+
     <select id="findOrdersAndOrderdetailResultMap" resultMap="ordersAndOrderdetailResultMap">
         select orders.*,
            user.username,
@@ -98,6 +98,67 @@
            orderdetail.orders_id
            from user,orders,orderdetail
            where orders.user_id = user.id and orderdetail.orders_id = orders.id
+    </select>
+
+    <!-- 查询用户信息及购买的商品信息 -->
+
+    <resultMap id="userAndItems" type="com.sunyanxiong.entities.User">
+        <!-- 用户信息 -->
+        <id column="user_id" property="id"/>
+
+        <result column="username" property="username"/>
+        <result column="birthday" property="birthday"/>
+        <result column="sex" property="sex"/>
+
+        <!-- 订单信息,一个用户可以创建多个订单，一对多关系 -->
+        <collection property="orders" ofType="com.sunyanxiong.entities.Orders">
+            <id column="orders_id" property="id"/>
+
+            <result column="user_id" property="user_id"></result>
+            <result column="number" property="number"></result>
+            <result column="createtime" property="createtime"></result>
+            <result column="note" property="note"></result>
+
+            <!-- 订单详情信息,一个订单中可以包含多个订单详情 -->
+            <collection property="orderdetails" ofType="com.sunyanxiong.entities.Orderdetail">
+                <id column="orderdetail_id" property="id"/>
+
+                <result column="items_id" property="items_id"/>
+                <result column="items_num" property="items_num"/>
+                <result column="orders_id" property="orders_id"/>
+
+                <!-- 商品信息，一个订单详情中只有一个商品信息，一对一 -->
+                <association property="items" javaType="com.sunyanxiong.entities.Items">
+                    <id column="items_id" property="id"/>
+
+                    <result column="items_name" property="name"/>
+                    <result column="items_price" property="price"/>
+                    <result column="items_createtime" property="createtime"/>
+                </association>
+
+            </collection>
+
+        </collection>
+
+    </resultMap>
+
+    <select id="findUserAndItems" resultMap="userAndItems">
+        select orders.*,
+            user.username,
+            user.birthday,
+            user.sex,
+            orderdetail.id as orderdetail_id,
+            orderdetail.items_id,
+            orderdetail.items_num,
+            orderdetail.orders_id,
+            items.id as items_id,
+            items.name as items_name,
+            items.price as items_price,
+            items.createtime as items_createtime
+        from user,orders,orderdetail,items
+        where orders.user_id = user.id
+        and orderdetail.orders_id = orders.id
+        and orderdetail.items_id = items.id;
     </select>
 
 

@@ -1,6 +1,9 @@
 package com.sunyanxiong.entities;
 
+import org.apache.logging.log4j.core.config.Order;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * Description: 购买商品的用户信息
@@ -14,6 +17,10 @@ public class User {
     private Date birthday;
     private String sex;
     private String address;
+
+    // 查询用户及商品信息
+    private List<Order> orders;
+
 
     public int getId() {
         return id;
@@ -55,6 +62,14 @@ public class User {
         this.address = address;
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -63,6 +78,7 @@ public class User {
                 ", birthday=" + birthday +
                 ", sex='" + sex + '\'' +
                 ", address='" + address + '\'' +
+                ", orders='" + orders + '\'' +
                 '}';
     }
 }

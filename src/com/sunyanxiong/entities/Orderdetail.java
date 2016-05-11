@@ -12,6 +12,10 @@ public class Orderdetail {
     private Integer items_id;
     private Integer items_num;
 
+    // 查询用户信息及商品信息，一个订单明细中只能存在一个商品,一对一
+    private Items items;
+
+
     public int getId() {
         return id;
     }
@@ -44,6 +48,14 @@ public class Orderdetail {
         this.items_num = items_num;
     }
 
+    public Items getItems() {
+        return items;
+    }
+
+    public void setItems(Items items) {
+        this.items = items;
+    }
+
     @Override
     public String toString() {
         return "Orderdetail{" +
@@ -53,4 +65,5 @@ public class Orderdetail {
                 ", items_num=" + items_num +
                 '}';
     }
+
 }
